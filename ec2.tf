@@ -3,7 +3,7 @@ resource "aws_instance" "ec2" {
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.rr-tf.key_name
   tenancy                     = "default"
-  subnet_id                   = element(values(aws_subnet.external_subnets), 0)
+  subnet_id                   = aws_subnet.external_subnets[*].id
   vpc_security_group_ids      = [aws_security_group.aurora_sg.id]
   associate_public_ip_address = true
 
