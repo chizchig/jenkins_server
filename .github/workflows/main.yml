@@ -40,8 +40,8 @@ jobs:
         internal_subnet_cidr_blocks = [${{ secrets.TF_VAR_INTERNAL_SUBNET_CIDR_BLOCKS }}]
         external_subnet_cidr_blocks = [${{ secrets.TF_VAR_EXTERNAL_SUBNET_CIDR_BLOCKS }}]
         vpc_cidr_block              = "${{ secrets.TF_VAR_VPC_CIDR_BLOCK }}"
-        ingress_rules               = ${{ secrets.TF_VAR_INGRESS_RULES }}
-        egress_rules                = ${{ secrets.TF_VAR_EGRESS_RULES }}
+        ingress_rules               = [${{ secrets.TF_VAR_INGRESS_RULES }}]
+        egress_rules                = [${{ secrets.TF_VAR_EGRESS_RULES }}]
         security_group_name         = "${{ secrets.TF_VAR_SECURITY_GROUP_NAME }}"
         ami_id                      = "${{ secrets.TF_VAR_AMI_ID }}"
         instance_type               = "${{ secrets.TF_VAR_INSTANCE_TYPE }}"
