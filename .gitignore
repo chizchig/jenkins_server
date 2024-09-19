@@ -15,7 +15,7 @@ crash.log
 # Exclude all .tfvars files, which might contain sensitive data, such as
 # password, private keys, and other secrets. Alternatively, you can include
 # specific .tfvars files if they don't contain sensitive information.
-*.tfvars
+
 
 # Ignore override files as they are usually used for local development
 override.tf
