@@ -25,7 +25,7 @@ resource "aws_instance" "ec2" {
   connection {
     type        = "ssh"
     user        = "ec2-user"
-    private_key = file("/Users/tehila/.ssh/id_rsa")
+    private_key = file("${path.module}/private_key.pem")
     host        = self.public_ip
     timeout     = "5m"
   }
