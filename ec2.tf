@@ -25,7 +25,7 @@ resource "aws_instance" "ec2" {
   connection {
     type        = "ssh"
     user        = "ec2-user"
-    private_key = file("${path.module}/private_key.pem")  # Path to the private key file
+    private_key = tls_private_key.rr.private_key_pem  # Path to the private key file
     host        = self.public_ip
     timeout     = "5m"
   }
