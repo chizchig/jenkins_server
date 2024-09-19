@@ -13,7 +13,8 @@ resource "aws_instance" "ec2" {
     encrypted             = true
     delete_on_termination = true
   }
-    ebs_block_device {
+
+  ebs_block_device {
     device_name           = "/dev/xvda"
     volume_size           = "1000"
     volume_type           = "gp2"
@@ -21,18 +22,17 @@ resource "aws_instance" "ec2" {
     delete_on_termination = true
   }
 
-
   connection {
     type        = "ssh"
     user        = "ec2-user"
-    private_key = file("${path.module}/private_key.pem")
+    private_key = file("${path.module}/private_key.pem")  # Path to the private key file
     host        = self.public_ip
     timeout     = "5m"
   }
 
   provisioner "file" {
     source      = "${path.module}/jenkins.sh"
-    destination = "/tmp/jenkins.sh"  # Adjust destination path as needed
+    destination = "/tmp/jenkins.sh"
   }
 
   provisioner "remote-exec" {
@@ -41,16 +41,8 @@ resource "aws_instance" "ec2" {
       "sudo /tmp/jenkins.sh"
     ]
   }
-  depends_on = [aws_instance.ec2]
 
   tags = {
     Name = "Super_Instance"
   }
 }
-
-  
-
-
-  
-
-
