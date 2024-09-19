@@ -19,11 +19,11 @@ resource "aws_vpc" "vpc" {
 }
 
 resource "aws_subnet" "external_subnets" {
-  for_each = { for idx, block in var.external_subnet_cidr_blocks : idx => { "cidr_block" = block, "availability_zone" = data.aws_availability_zones.available.names[idx] } }
+  for_each = { for idx, cidr in var.external_subnet_cidr_blocks : idx => cidr } # { for idx, block in var.external_subnet_cidr_blocks : idx => { "cidr_block" = block, "availability_zone" = data.aws_availability_zones.available.names[idx] } }
 
   vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = each.value["cidr_block"]
-  availability_zone       = each.value["availability_zone"]
+  cidr_block              = each.value #each.value["cidr_block"]
+  availability_zone       = data.aws_availability_zones.available.names[tonumber(each.key)] #each.value["availability_zone"]
   map_public_ip_on_launch = true
 
   tags = {
